@@ -113,4 +113,3 @@ const CollectionPage = () => {
 }
 
 export default CollectionPage
-//04:00
