@@ -14,6 +14,7 @@ import OrderConfirmationPage from './pages/OrderConfirmationPage'
 import OrderDetailsPage from './pages/OrderDetailsPage'
 import MyOrdersPage from './pages/MyOrdersPage'
 import AdminLayout from './components/Admin/AdminLayout'
+import AdminHomePage from './pages/AdminHomePage'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -34,7 +35,9 @@ function App() {
             <Route path='order-confirmation' element={<OrderConfirmationPage />} />
             <Route path='order/:id' element={<OrderDetailsPage />} />
             <Route path='my-orders' element={<MyOrdersPage />} />
-            <Route path='/admin' element={<AdminLayout />} />
+            <Route path='/admin' element={<AdminLayout />} >
+             <Route index element={<AdminHomePage />} />
+            </Route>
           </Route>
           {/* Admin Layout */}
         </Routes>
