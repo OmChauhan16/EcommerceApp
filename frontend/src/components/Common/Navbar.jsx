@@ -56,7 +56,7 @@ const Navbar = () => {
                         <span className='absolute -top-1 bg-[#ea2e0e] text-white text-xs rounded-full px-2 py-0.5'>4</span>
                     </button>
                     {/* Search */}
-                    <div className='overflow:hidden'>
+                    <div className='overflow-hidden'>
                         <SearchBar />
                     </div>
                     <button onClick={toggleNavDrawer} className='md:hidden'>
@@ -70,7 +70,7 @@ const Navbar = () => {
             <div className={`fixed top-0 left-0 w-3/4 sm:w-1/2 md:w-1/3 h-full bg-white shadow-lg transform transition-transform duration-300 z-50
                 ${navDrawerOpen ? "translate-x-0" : "-translate-x-full"}
                 `}>
-                <div className='flex jusitfy-end p-4'>
+                <div className='flex justify-end p-4'>
                     <button onClick={toggleNavDrawer}>
                         <IoMdClose className='h-6 w-6 text-gray-600' />
                     </button>
