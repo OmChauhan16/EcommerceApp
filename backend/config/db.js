@@ -12,4 +12,3 @@ const connectDb = async () => {
     }
 }
 export { connectDb }
-//07:33
