@@ -269,4 +269,3 @@ router.get("/similar/:id", async (req, res) => {
 
 
 export { router as productRoutes }
-//09:19
