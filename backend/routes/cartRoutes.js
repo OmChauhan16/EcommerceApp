@@ -198,7 +198,7 @@ router.post("/merge", protect, async (req, res) => {
             }
 
             if (userCart) {
-                // Merge guset cart into user cart 
+                // Merge guest cart into user cart 
                 guestCart.products.forEach((guestItem) => {
                     const productIndex = userCart.products.findIndex((item) =>
                         item.productId.toString() === guestItem.productId.toString() &&
