@@ -17,6 +17,10 @@ const checkOutItemSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true
+    },
+    quantity: {
+        type: Number,
+        required: true
     }
 },
     { _id: false }
@@ -33,7 +37,6 @@ const checkOutSchema = new mongoose.Schema({
         address: { type: String, required: true },
         city: { type: String, required: true },
         postalCode: { type: String, required: true },
-        address: { type: String, required: true },
         country: { type: String, required: true }
     },
     paymentMethod: {
@@ -69,5 +72,5 @@ const checkOutSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 const Checkout = mongoose.model("Checkout", checkOutSchema);
- 
+
 export default Checkout 
