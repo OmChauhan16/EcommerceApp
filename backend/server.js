@@ -9,6 +9,9 @@ import { checkoutRoutes } from "./routes/checkoutRoutes.js";
 import { orderRoutes } from "./routes/orderRoutes.js";
 import { uploadRoutes } from "./routes/uploadRoutes.js";
 import { subscribeRoutes } from "./routes/subscribeRoute.js";
+import { adminRoutes } from "./routes/adminRoutes.js";
+import { adminProductRoutes } from "./routes/productAdminRoutes.js";
+import { adminOrderRoutes } from "./routes/adminOrderRoutes.js";
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -34,6 +37,11 @@ app.use("/api/checkout", checkoutRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api", subscribeRoutes);
+
+//Admin
+app.use("/api/admin/users", adminRoutes)
+app.use("/api/admin/products", adminProductRoutes)
+app.use("/api/admin/orders", adminOrderRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
