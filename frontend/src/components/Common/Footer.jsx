@@ -37,7 +37,7 @@ const Footer = () => {
                             <Link to="#" className='hover:text-gray-500 transition-colors'>Men's Top Wear</Link>
                         </li>
                         <li>
-                            <Link to="#" className='hover:text-gray-500 transition-colors'>Men's Top Wear</Link>
+                            <Link to="#" className='hover:text-gray-500 transition-colors'>Women's Top Wear</Link>
                         </li>
                         <li>
                             <Link to="#" className='hover:text-gray-500 transition-colors'>Men's Bottom Wear</Link>
