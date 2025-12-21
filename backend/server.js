@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(
     cors({
         origin: ["http://localhost:5173",
-            "https://ecommerce-app-g1x5.vercel.app/"
+            "https://ecommerce-app-g1x5.vercel.app"
         ],
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
