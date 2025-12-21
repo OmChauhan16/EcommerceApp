@@ -9,7 +9,7 @@ const loadCartFromStorage = () => {
 }
 
 //Helper function to save cart to localStorage
-const saveCartToStorage = () => {
+const saveCartToStorage = (cart) => {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 

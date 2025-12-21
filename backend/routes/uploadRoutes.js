@@ -1,6 +1,5 @@
 import express from "express";
 import multer from "multer";
-// import cloudinary from "cloudinary";
 import { v2 as cloudinary } from "cloudinary";
 import streamifier from "streamifier";
 import { configDotenv } from "dotenv";

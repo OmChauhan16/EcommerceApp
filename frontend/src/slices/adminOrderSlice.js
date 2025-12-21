@@ -4,11 +4,13 @@ import axios from "axios";
 //Fetch all orders(admin only)
 export const fetchAllOrders = createAsyncThunk("adminOrders/fetchAllOrders", async (_, { rejectWithValue }) => {
     try {
+        
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders`, {
             headers: {
-                Authorization: `Bearer${localStorage.getItem('userToken')}`
+                Authorization: `Bearer ${localStorage.getItem('userToken')}`
             }
         })
+        
         return response.data;
 
     } catch (error) {
@@ -24,7 +26,7 @@ export const updateOrderStatus = createAsyncThunk("adminOrders/updateOrderStatus
         try {
             const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders/${id}`, { status }, {
                 headers: {
-                    Authorization: `Bearer${localStorage.getItem('userToken')}`
+                    Authorization: `Bearer ${localStorage.getItem('userToken')}`
                 }
             })
             return response.data;
@@ -86,12 +88,12 @@ const adminOrderSlice = createSlice({
 
             //Update Order Status
             .addCase(updateOrderStatus.fulfilled, (state, action) => {
-                const updatedOrder = action.payload;
-                const orderIndex = state.orders.findIndex((order) => {
+                const updatedOrder = action.payload;                
+                const orderIndex = state.orders.findIndex((order) => 
                     order._id === updatedOrder._id
-                });
+                );
                 if (orderIndex !== -1) {
-                    state.orders[orderIndex] = updateOrder;
+                    state.orders[orderIndex] = updatedOrder;
                 }
             })
             //Delete an order

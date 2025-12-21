@@ -1,19 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import register from "../assets/register.webp";
 import { Link } from 'react-router-dom';
 import { registerUser } from "../slices/authSlice"
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { mergeCart } from '../slices/cartSlice';
 const Register = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { user, guestId, loading } = useSelector((state) => state.auth);
+    const { cart } = useSelector((state) => state.cart);
+
+    //Get redirect parameter and check if it's checkout or something
+    const redirect = new URLSearchParams(location.search).get('redirect') || "/";
+    const isCheckoutRedirect = redirect.includes("checkout");
+
+    useEffect(() => {
+        if (user) {
+            if (cart?.products.length > 0 && guestId) {
+                dispatch(mergeCart({ guestId, user })).then(() => {
+                    navigate(isCheckoutRedirect ? "/checkout" : "/")
+                })
+            }
+            else {
+                navigate(isCheckoutRedirect ? "/checkout" : "/")
+            }
+        }
+    }, [user, guestId, cart, navigate, isCheckoutRedirect, dispatch])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(name,'name');
-        
         dispatch(registerUser({ name, email, password }));
     }
 
@@ -52,10 +74,10 @@ const Register = () => {
                             placeholder='Enter your password'
                         />
                     </div>
-                    <button type='submit' className='w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800 transition'>Sign Up</button>
+                    <button type='submit' className='w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800 transition'>{loading ? "loading..." : "Sign Up"}</button>
                     <p className='mt-6 text-center text-sm'>
                         Don't have an account?{" "}
-                        <Link to="/login" className="text-blue-500">Login</Link>
+                        <Link to={`/login?redirect=${encodeURIComponent(redirect)}`} className="text-blue-500">Login</Link>
                     </p>
                 </form>
             </div>

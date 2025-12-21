@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { configDotenv } from "dotenv";
 import Product from "./models/Product.js";
 import User from "./models/User.js";
-import { Cart } from "./models/Cart.js";
+import Cart from "./models/Cart.js";
 import { products } from "./data/products.js";
 
 

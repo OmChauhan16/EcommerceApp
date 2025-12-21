@@ -32,7 +32,7 @@ export const fetchProductsByFilters = createAsyncThunk("products/fetchByFilters"
         if (brand) query.append("brand", brand);
         if (limit) query.append("limit", limit);
 
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products?${query.toString()}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products?${query.toString()}`);        
         return response.data;
     }
 )
@@ -112,8 +112,11 @@ const productsSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchProductsByFilters.fulfilled, (state, action) => {
-                state.loading = false,
-                    state.products = Array.isArray(action.payload) ? action.payload : [];
+                state.loading = false;
+                 state.products = Array.isArray(action.payload)
+                    ? action.payload
+                    : action.payload.products || [];
+                    // state.products = Array.isArray(action.payload) ? action.payload : [];
             })
             .addCase(fetchProductsByFilters.rejected, (state, action) => {
                 state.loading = false;
@@ -143,7 +146,7 @@ const productsSlice = createSlice({
                 state.loading = false;
                 const updatedProduct = action.payload;
                 const index = state.products.findIndex(
-                    (product) => product._id === updateProduct._id
+                    (product) => product._id === updatedProduct._id
                 );
                 if (index !== -1) {
                     state.products[index] = updatedProduct;

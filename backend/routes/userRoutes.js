@@ -10,7 +10,6 @@ const router = express.Router();
 // @access Public
 
 router.post("/register", async (req, res) => {
-    console.log(req.body,'bodymn');
     
     const { name, email, password } = req.body;
 
@@ -75,7 +74,7 @@ router.post("/login", async (req, res) => {
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
-            { expiresIn: "1h" },
+            { expiresIn: "2h" },
             (err, token) => {
                 if (err) throw err;
 

@@ -3,8 +3,9 @@ import { toast } from 'sonner';
 import ProductGrid from './ProductGrid';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
-// const selectedProducts = {
+import { fetchProductDetails, fetchSimilarProducts } from '../../slices/productsSlice';
+import { addToCart } from '../../slices/cartSlice';
+// const selectedProduct = {
 //     name: "Stylish Jacket",
 //     price: 120,
 //     originalPrice: 150,
@@ -76,10 +77,10 @@ const ProductDetails = ({ productId }) => {
     }, [dispatch, productFetchId]);
 
     useEffect(() => {
-        if (selectedProducts?.images?.length > 0) {
-            setMainImage(selectedProducts.images[0].url)
+        if (selectedProduct?.images?.length > 0) {
+            setMainImage(selectedProduct.images[0].url)
         }
-    }, [selectedProducts])
+    }, [selectedProduct])
 
     const handleQuantityChange = (action) => {
         if (action === "plus") setQuantity((prev) => prev + 1)
@@ -102,7 +103,7 @@ const ProductDetails = ({ productId }) => {
             color: selectedColor,
             guestId,
             userId: user?._id
-        })
+        }))
             .then(() => {
                 toast.success("Product added to cart!", {
                     duration: 1000
@@ -111,7 +112,7 @@ const ProductDetails = ({ productId }) => {
             .finally(() => {
                 setIsButtonDisabled(false);
             })
-        )
+        
     }
 
     if (loading) {
@@ -128,7 +129,7 @@ const ProductDetails = ({ productId }) => {
                     <div className='flex flex-col md:flex-row'>
                         {/* Left Thumbnails */}
                         <div className='hidden md:flex flex-col space-y-4 mr-6'>
-                            {selectedProducts.images.map((image, index) => (
+                            {selectedProduct.images.map((image, index) => (
                                 <img key={index}
                                     src={image.url}
                                     alt={image.altText || `Thumbnail${index}`}
@@ -149,7 +150,7 @@ const ProductDetails = ({ productId }) => {
 
                         {/* Mobile Thumbnail */}
                         <div className='md:hidden flex overscroll-x-scroll space-x-4 mb-4'>
-                            {selectedProducts.images.map((image, index) => (
+                            {selectedProduct.images.map((image, index) => (
                                 <img key={index}
                                     src={image.url}
                                     alt={image.altText || `Thumbnail${index}`}
@@ -163,23 +164,23 @@ const ProductDetails = ({ productId }) => {
                         {/* Right Side */}
                         <div className='md:w-1/2 md:ml-10'>
                             <h1 className='text-2xl md:text-3xl font-semibold mb-2'>
-                                {selectedProducts.name}
+                                {selectedProduct.name}
                             </h1>
 
                             <p className='text-lg text-gray-600 mb-1 line-through'>
-                                {selectedProducts.originalPrice &&
-                                    `${selectedProducts.originalPrice}`}
+                                {selectedProduct.originalPrice &&
+                                    `${selectedProduct.originalPrice}`}
                             </p>
                             <p className='text-xl text-gray-500 mb-2'>
-                                {selectedProducts.price}
+                                {selectedProduct.price}
                             </p>
                             <p className='text-gray-600 mb-4'>
-                                {selectedProducts.description}
+                                {selectedProduct.description}
                             </p>
                             <div className='mb-4'>
                                 <p className='text-gray-700'>Color:</p>
                                 <div className='flex gap-2 mt-2'>
-                                    {selectedProducts.colors.map((color) => (
+                                    {selectedProduct.colors.map((color) => (
                                         <button key={color}
                                             onClick={() => setSelectedColor(color)}
                                             className={`w-8 h-8 rounded-full border ${selectedColor === color ? "border-4 border-black" : "border-gray-300"}`}
@@ -195,7 +196,7 @@ const ProductDetails = ({ productId }) => {
                             <div className='mb-4'>
                                 <p className='text-gray-700'>Size:</p>
                                 <div className='flex gap-2 mt-2'>
-                                    {selectedProducts.sizes.map((size) => (
+                                    {selectedProduct.sizes.map((size) => (
                                         <button key={size}
                                             onClick={() => setSelectedSize(size)}
                                             className={`px-4 py-2 rounded border ${selectedSize === size ? "bg-black text-white" : ""}`}>{size}</button>
@@ -231,11 +232,11 @@ const ProductDetails = ({ productId }) => {
                                     <tbody>
                                         <tr>
                                             <td className='py-1'>Brand</td>
-                                            <td className='py-1'>{selectedProducts.brand}</td>
+                                            <td className='py-1'>{selectedProduct.brand}</td>
                                         </tr>
                                         <tr>
                                             <td className='py-1'>Material</td>
-                                            <td className='py-1'>{selectedProducts.material}</td>
+                                            <td className='py-1'>{selectedProduct.material}</td>
                                         </tr>
                                     </tbody>
                                 </table>

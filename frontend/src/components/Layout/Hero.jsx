@@ -1,5 +1,4 @@
 import React from 'react'
-// import heroImg from "../../assets/rabbit-hero.webp";
 import heroImg from "../../assets/rabbit-hero.webp";
 import { Link } from "react-router-dom";
 

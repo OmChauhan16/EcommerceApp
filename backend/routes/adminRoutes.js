@@ -71,7 +71,10 @@ router.put("/:id", protect, admin, async (req, res) => {
 // @access Private/Admin
 router.delete("/:id", protect, admin, async (req, res) => {
     try {
+        console.log(req.params.id);
+
         const user = await User.findById(req.params.id);
+
 
         if (user) {
             await user.deleteOne();

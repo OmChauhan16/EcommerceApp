@@ -73,7 +73,12 @@ router.put("/:id/pay", protect, async (req, res) => {
 // @access Private
 router.post("/:id/finalize", protect, async (req, res) => {
     try {
+
         const checkout = await Checkout.findById(req.params.id);
+        console.log("Finalizing checkout:", checkout._id);
+        console.log("Creating order for user:", checkout.user);
+        console.log(checkout, 'checkout-80');
+
 
         if (!checkout) {
             return res.status(404).json({ message: "Checkout not found" });
@@ -91,7 +96,9 @@ router.post("/:id/finalize", protect, async (req, res) => {
                 paidAt: checkout.paidAt,
                 isDelivered: false,
                 paymentStatus: "paid",
-                paymentDetails: checkout.paymentDetails
+                paymentDetails: checkout.paymentDetails,
+                size: checkout.size,
+                color: checkout.color
             });
 
             // Mark the checkout as finalized
@@ -116,4 +123,3 @@ router.post("/:id/finalize", protect, async (req, res) => {
 })
 
 export { router as checkoutRoutes }
-//10:54

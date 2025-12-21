@@ -11,6 +11,7 @@ export const fetchAdminProducts = createAsyncThunk("adminProducts/fetchProducts"
             Authorization: USER_TOKEN
         }
     })
+
     return response.data;
 })
 
@@ -48,7 +49,7 @@ export const updateProduct = createAsyncThunk(
 //async thunk to delete a product
 export const deleteProduct = createAsyncThunk("adminProducts/deleteProduct",
     async (id) => {
-        await axios.delete(`${API_URL}/api/admin/products/${id}`, {
+        await axios.delete(`${API_URL}/api/products/${id}`, {
             headers: {
                 Authorization: USER_TOKEN
             }
@@ -60,7 +61,7 @@ export const deleteProduct = createAsyncThunk("adminProducts/deleteProduct",
 const adminProductSlice = createSlice({
     name: "adminProducts",
     initialState: {
-        producs: [],
+        products: [],
         loading: false,
         error: null
     },

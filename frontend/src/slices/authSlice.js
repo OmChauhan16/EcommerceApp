@@ -57,7 +57,7 @@ const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.user = null;
-            state.guestId = `guest_${new Date.getTime()}`;  //Request guest Id on logout
+            state.guestId = `guest_${new Date().getTime()}`;  //Request guest Id on logout
             localStorage.removeItem("userInfo");
             localStorage.removeItem("userToken");
             localStorage.setItem("guestId", state.guestId); // Set new guestId in localStorage
