@@ -14,7 +14,17 @@ import { adminProductRoutes } from "./routes/productAdminRoutes.js";
 import { adminOrderRoutes } from "./routes/adminOrderRoutes.js";
 const app = express();
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(
+    cors({
+        origin: ["http://localhost:5173",
+            "https://ecommerce-app-g1x5.vercel.app/"
+        ],
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+        credentials: true
+    })
+);
 
 configDotenv();
 
